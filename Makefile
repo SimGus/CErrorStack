@@ -8,11 +8,19 @@ SRC = src
 #================== Make program =====================
 all : $(PROG)
 
-$(PROG) : main.o #$(SRC)/defines.h
+$(PROG) : main.o $(SRC)/defines.h ErrorTraceStack.o alloc.o
 	$(CC) $(CFLAGS) -o $(PROG) main.o
 
 main.o : $(SRC)/main.c
 	$(CC) $(CFLAGS) -c $(SRC)/main.c
+
+#=============== Compile misc files ===================
+alloc.o : $(SRC)/alloc.c
+	$(CC) $(CFLAGS) -c $(SRC)/alloc.c
+
+#============= Compile error files ====================
+ErrorTraceStack.o : $(SRC)/ErrorTraceStack.c
+	$(CC) $(CFLAGS) -c $(SRC)/ErrorTraceStack.c
 
 #============= Clean and tests =========================
 clean :
