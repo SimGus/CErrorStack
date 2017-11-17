@@ -1,5 +1,5 @@
-#ifndef _CERRORSTACK_STACK_H_
-#define _CERRORSTACK_STACK_H_
+#ifndef _CERRORSTACK_ERROR_TRACE_STACK_H_
+#define _CERRORSTACK_ERROR_TRACE_STACK_H_
 
 #include <stdbool.h>
 
@@ -51,4 +51,4 @@ ErrorNode* pop(ErrorNode const** errorTraceStack);
  */
 void remove(ErrorNode** errorTraceStack);
 
-#endif //_CERRORSTACK_STACK_H_
+#endif //_CERRORSTACK_ERROR_TRACE_STACK_H_
