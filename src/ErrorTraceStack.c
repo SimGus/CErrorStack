@@ -1,7 +1,8 @@
 #include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
 
-#include "Stack.h"
+#include "ErrorTraceStack.h"
 #include "alloc.h"
 
 ErrorNode* newErrorTraceStack()
@@ -20,7 +21,7 @@ ErrorNode* newErrorNode(char const* const callingFileName, int const callingLine
       result->callingFileName[i] = callingFileName[i];
 
    result->callingLineContent = malloc(strlen(callingLineContent) *sizeof(char));
-   for (int i=0; i<strlen(callingLineContent; i++))
+   for (int i=0; i<strlen(callingLineContent); i++)
       result->callingLineContent[i] = callingLineContent[i];
 
    return result;
@@ -37,11 +38,11 @@ ErrorNode* push(ErrorNode* newNode, ErrorNode* errorTraceStack)
    return newNode;
 }
 
-ErrorNode* pop(ErrorNode const** errorTraceStack)
+ErrorNode* pop(ErrorNode** errorTraceStack)
 {
    if (isErrorStackEmpty(*errorTraceStack))
    {
-      fprintf(stderr, "WARNING: %s\n", "Tried to pop an empty stack.");//TODO replace this
+      fprintf(stderr, "WARNING: %s\n", "Tried to pop an empty stack.");//TODO replace this (remove stdio)
       return NULL;
    }
 
@@ -50,8 +51,8 @@ ErrorNode* pop(ErrorNode const** errorTraceStack)
    return poppedNode;
 }
 
-void remove(ErrorNode** errorTraceStack)
+void removeTail(ErrorNode** errorTraceStack)
 {
-   ErrorNode poppedNode = pop(errorTraceStack);
+   ErrorNode* poppedNode = pop(errorTraceStack);
    del(poppedNode);
 }

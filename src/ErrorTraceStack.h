@@ -6,7 +6,7 @@
 typedef struct ErrorNode
 {
    //----- Boilerplate stack variables ---------
-   ErrorNode* lastNode;
+   struct ErrorNode* lastNode;
    //----- Node attributes ---------
    char* callingFileName;// the name of the file from which the function has been called
    int callingLineNb;// the line at which the call has been performed
@@ -43,12 +43,12 @@ ErrorNode* push(ErrorNode* newNode, ErrorNode* errorTraceStack);
  * Pops the last $ErrorNode from the stack $errorTraceStack
  * Returns this node
  */
-ErrorNode* pop(ErrorNode const** errorTraceStack);
+ErrorNode* pop(ErrorNode** errorTraceStack);
 
 /*
  * Pops the last $ErrorNode from the stack $errorTraceStack
  * but doesn't return it (frees this pointer)
  */
-void remove(ErrorNode** errorTraceStack);
+void removeTail(ErrorNode** errorTraceStack);
 
 #endif //_CERRORSTACK_ERROR_TRACE_STACK_H_
